@@ -9,7 +9,6 @@ function handleButtonClick(event) {
     if (current && current !== event.target) {
         current.classList.remove(selectedClassName);
     }
-
     const color = event.target.dataset.color;
     event.target.classList.add(selectedClassName);
     chrome.storage.sync.set({ color });
@@ -18,21 +17,16 @@ function handleButtonClick(event) {
 function constructOptions(buttonColors) {
     chrome.storage.sync.get('color', (data) => {
         const currentColor = data.color;
-
         for (const buttonColor of buttonColors) {
             const button = document.createElement('button');
             button.dataset.color = buttonColor;
             button.style.backgroundColor = buttonColor;
-
             if (buttonColor === currentColor) {
                 button.classList.add(selectedClassName);
             }
-
             button.addEventListener('click', handleButtonClick);
             page.appendChild(button);
         }
     });
 }
-
-// Initialize the page by constructing the color options
 constructOptions(presetButtonColors);
