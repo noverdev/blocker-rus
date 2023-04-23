@@ -6,14 +6,16 @@ chrome.storage.sync.get('color', ({color}) => {
 
 changeColor.addEventListener('click', async () => {
     const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
-    const [body] = await chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        func: () => console.log(document.body.innerText)
-    });
-    console.log(body);
     chrome.scripting.executeScript({
         target: {tabId: tab.id},
         func: setPageBackgroundColor
+    });
+    chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        func: () => {
+            console.log('Hello from the content script!');
+            console.log(document.body.innerText);
+        }
     });
 });
 
