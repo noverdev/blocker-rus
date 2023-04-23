@@ -7,7 +7,7 @@
     "service_worker": "background.js"
   },
   "content_scripts": [{
-    "js": ["popup.js"]
+    "js": ["test.js"]
   }],
   "permissions": ["activeTab", "scripting"],
   "browser_action": {
