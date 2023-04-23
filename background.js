@@ -1,5 +1,11 @@
-const color = '#3aa757';
+var urlRegex = /^https?:\/\/(?:[^./?#]+\.)?stackoverflow\.com/;
 
-chrome.storage.sync.set({ color }, () => {
-    console.log('The color is green.');
+function doStuffWithDom(domContent) {
+    console.log('I received the following DOM content:\n' + domContent);
+}
+
+chrome.browserAction.onClicked.addListener(function (tab) {
+    if (urlRegex.test(tab.url)) {
+        chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doStuffWithDom);
+    }
 });
