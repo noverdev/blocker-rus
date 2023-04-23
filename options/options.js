@@ -11,7 +11,7 @@ function handleButtonClick(event) {
     }
     const color = event.target.dataset.color;
     event.target.classList.add(selectedClassName);
-    chrome.storage.sync.set({ color });
+    chrome.storage.sync.set({color});
 }
 
 function constructOptions(buttonColors) {
@@ -29,4 +29,5 @@ function constructOptions(buttonColors) {
         }
     });
 }
+
 constructOptions(presetButtonColors);
